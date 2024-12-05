@@ -45,7 +45,7 @@ class EventBriteScraper:
             assert all([result.scheme, result.netloc, result.path])
             return True
         except (AssertionError, ValueError):
-            logging.warning(f"Invalid Eventbrite URL: {url}")
+            logging.error(f"Invalid Eventbrite URL: {url}")
             return False
 
     def _fetch_initial_data(self) -> tuple[str, dict]:
@@ -171,7 +171,6 @@ if __name__ == "__main__":
     input_url = input("> Enter the Eventbrite URL: ")
 
     if not EventBriteScraper.is_valid_event_url(input_url):
-        logging.error("Invalid Eventbrite URL")
         exit(1)
 
     scraper = EventBriteScraper(url_param=input_url)
